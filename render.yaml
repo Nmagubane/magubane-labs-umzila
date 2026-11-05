@@ -1,0 +1,43 @@
+# Render Blueprint: New > Blueprint in the Render dashboard, then pick this repo.
+services:
+  - type: web
+    name: umzila
+    runtime: node
+    region: frankfurt # closest Render region to South Africa
+    plan: 0.5c-512mb # smallest paid instance; a persistent disk needs a paid instance
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.22.0
+      - key: DATABASE_PATH
+        value: /var/data/umzila.db
+      - key: TRUST_PROXY
+        value: "1"
+      - key: SIGNUP_MODE
+        value: invite
+      - key: INVITE_CODES # comma-separated, for learners without a class code
+        sync: false
+      - key: EDUCATOR_CODES # comma-separated, unlocks teacher accounts
+        sync: false
+      - key: PUBLIC_URL # e.g. https://umzila.magubanelabs.co.za
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
+      - key: EMAIL_PROVIDER
+        value: brevo
+      - key: EMAIL_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_FROM_NAME
+        value: Umzila
+      - key: TZ
+        value: Africa/Johannesburg
