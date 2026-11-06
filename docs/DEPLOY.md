@@ -37,6 +37,8 @@ git push -u origin main
 
 ## Stage 3: the address
 
+Render's free Hobby workspace includes two custom domains, and Bonisa uses both, so this third one costs $0.25 a month (added 6 Nov 2026). The Cloudflare record is DNS only, like `learn`.
+
 1. **Render** → `umzila` → **Settings** → **Custom Domains** → **Add** `umzila.magubanelabs.co.za`. Render shows a CNAME target (`umzila.onrender.com`).
 2. **Cloudflare** → `magubanelabs.co.za` → **DNS** → **Add record**: type `CNAME`, name `umzila`, target the value Render showed. **Proxy status: the same as your `learn` record.**
 3. Wait for Render to show **Verified** and **Certificate issued**.
